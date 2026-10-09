@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>E-Commerce Purchase Predictor</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <header>
+
+            <div class="badge">
+                ML POWERED
+            </div>
+
+            <h1>
+                E-Commerce Purchase Predictor
+            </h1>
+
+            <p>
+                Predict whether an online shopping session
+                is likely to result in a purchase.
+            </p>
+
+        </header>
+
+
+        <main>
+
+            <section class="card">
+
+                <h2>
+                    Session Information
+                </h2>
+
+                <form id="predictionForm">
+
+
+                    <div class="grid">
+
+
+                        <div class="field">
+
+                            <label>
+                                Administrative Pages
+                            </label>
+
+                            <input type="number" id="Administrative" value="3" step="any" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Administrative Duration
+                            </label>
+
+                            <input type="number" id="Administrative_Duration" value="100" step="any" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Informational Pages
+                            </label>
+
+                            <input type="number" id="Informational" value="2" step="any" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Informational Duration
+                            </label>
+
+                            <input type="number" id="Informational_Duration" value="50" step="any" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Product Related Pages
+                            </label>
+
+                            <input type="number" id="ProductRelated" value="20" step="any" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Product Related Duration
+                            </label>
+
+                            <input type="number" id="ProductRelated_Duration" value="1000" step="any" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Bounce Rate
+                            </label>
+
+                            <input type="number" id="BounceRates" value="0.02" step="0.001" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Exit Rate
+                            </label>
+
+                            <input type="number" id="ExitRates" value="0.05" step="0.001" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Page Value
+                            </label>
+
+                            <input type="number" id="PageValues" value="10" step="any" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Special Day
+                            </label>
+
+                            <input type="number" id="SpecialDay" value="0" step="0.01" min="0" max="1" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Month
+                            </label>
+
+                            <select id="Month">
+
+                                <option>Jan</option>
+                                <option>Feb</option>
+                                <option>Mar</option>
+                                <option>Apr</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>Jul</option>
+                                <option>Aug</option>
+                                <option>Sep</option>
+                                <option>Oct</option>
+                                <option selected>Nov</option>
+                                <option>Dec</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Operating System
+                            </label>
+
+                            <input type="number" id="OperatingSystems" value="2" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Browser
+                            </label>
+
+                            <input type="number" id="Browser" value="2" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Region
+                            </label>
+
+                            <input type="number" id="Region" value="1" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Traffic Type
+                            </label>
+
+                            <input type="number" id="TrafficType" value="2" required>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Visitor Type
+                            </label>
+
+                            <select id="VisitorType">
+
+                                <option selected>
+                                    Returning_Visitor
+                                </option>
+
+                                <option>
+                                    New_Visitor
+                                </option>
+
+                                <option>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="field checkbox-field">
+
+                            <label>
+                                Weekend Session
+                            </label>
+
+                            <input type="checkbox" id="Weekend">
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button type="submit" id="predictButton">
+                        Predict Purchase
+                    </button>
+
+
+                </form>
+
+            </section>
+
+
+            <section id="result" class="result hidden">
+
+                <h2 id="resultTitle">
+                    Prediction
+                </h2>
+
+
+                <div class="probability">
+
+                    <span id="probability">
+                        0%
+                    </span>
+
+                    <small>
+                        Purchase Probability
+                    </small>
+
+                </div>
+
+
+                <div id="prediction" class="prediction">
+                    —
+                </div>
+
+
+                <div class="threshold">
+
+                    Classification Threshold:
+                    <strong id="threshold">
+                        0.35
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <footer>
+
+            <span>
+                XGBoost
+            </span>
+
+            <span>
+                ROC-AUC: 0.9307
+            </span>
+
+            <span>
+                FastAPI
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
